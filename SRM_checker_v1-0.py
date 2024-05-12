@@ -1,10 +1,4 @@
 # %%
-# import required packages
-import numpy as np
-from scipy.stats import chisquare
-from tkinter import *
-
-# %%
 # create root window
 root = Tk()
 
@@ -87,42 +81,4 @@ btn.grid(column=2, row=1)
 # all widgets will be here
 # Execute Tkinter
 root.mainloop()
-
-# %%
-sample_size_contr = "5"
-sample_size_variant = "5"
-
-res = int(sample_size_contr) + int(sample_size_variant)
-output = f"""Your total sample size is {res}."""
-print(output)
-
-# %%
-# Input
-number_test_groups = 2
-sample_size_1 = 5000
-sample_size_2 = 5000
-# transformations
-frequency_samples = np.array([sample_size_1, sample_size_2])
-total_sample = sample_size_1 + sample_size_2
-exp_freq = np.array([0.5*total_sample, 0.5*total_sample])
-
-# %%
-# perform chisquare test with assumed equal distribution
-test_result = chisquare(frequency_samples, f_exp=None)
-
-# %%
-# output
-if test_result.pvalue < 0.1:
-    print(f"""The p-value is smaller than 0.1 ({test_result.pvalue}). 
-A possible SRM (Sample Ratio Mismatch) is detected. 
-Please contact your AB test experts before analysing the test results.""")
-else:
-    print(f"""The p-value is greater than 0.1 ({test_result.pvalue}). 
-No SRM (Sample Ratio Mismatch) is detected. 
-Happy analysing your test results.""")
-
-# %%
-
-
-
 
